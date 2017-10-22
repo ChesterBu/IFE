@@ -1,0 +1,125 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+table {
+    width: 400px;
+    margin: 0 auto;
+}
+
+thead tr {
+    color: #fff;
+    background-color: #000;
+
+}
+
+tbody tr {
+    color: #000;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #456;
+}
+
+tbody tr:nth-child(-n+3) {
+    color: red;
+}
+
+.transform-input {
+    text-align: center;
+}
+
+.transform-input input {
+    width: 100px;
+    height: 20px;
+    margin: 20px 0;
+}
+
+.transform-input input:focus {
+    width: 200px;
+    border-radius: 5px;
+    transition: width 1s linear;
+    -webkit-transition: width 1s linear;
+    -o-transition: width 1s linear;
+    -moz-transition: width 1s linear;
+    box-shadow: 0px 0px 7px rgba(0, 80, 192, 0.8);
+}
+
+.tab {
+    width: 600px;
+    height: 300px;
+    border: 1px solid;
+}
+
+.tab ul {
+    list-style: none;
+}
+
+.banner {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border: 1px solid;
+    overflow: hidden;
+
+}
+
+.wrap {
+    position: absolute;
+    z-index: 1;
+    width: calc(300px * 4);
+
+}
+
+.play {
+    animation: ma 20s ease-out infinite normal;
+    animation-fill-mode: backwards;
+}
+
+@keyframes ma {
+    0%, 25% {
+        margin-left: 0px;
+    }
+    30%, 50% {
+        margin-left: -300px;
+    }
+    55%, 75% {
+        margin-left: -600px;
+    }
+    80%, 100% {
+        margin-left: -900px;
+    }
+
+}
+
+.banner .wrap div {
+    display: inline;
+    float: left;
+    width: 300px;
+    height: 200px;
+
+}
+
+.banner div:nth-child(1) {
+    background-color: red;
+}
+
+.banner div:nth-child(2) {
+    background-color: blue;
+}
+
+.banner div:nth-child(3) {
+    background-color: yellow;
+}
+
+.banner div:nth-child(4) {
+    background-color: skyblue;
+
+}
+
+
