@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .showList {
+            display: inline;
+            width: 80px;
+            height: 80px;
+            background-color: skyblue;
+            float: left;
+            font: 30px/80px bold;
+            text-align: center;
+            color: #ffffff;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<label for="ipt"></label><input type="text" name="ipt" id="ipt">
+<button id="leftIn">左侧入</button>
+<button id="rightIn">右侧入</button>
+<button id="leftOut">左侧出</button>
+<button id="rightOut">右侧出</button>
+
+<ul id="outPut"></ul>
+
+
+<script>
+    !function () {
+        let input = document.getElementById("ipt"),
+            outPut = document.querySelector("#outPut"),
+            button = document.getElementsByTagName("button"),
+            array = [];
+        let show = function () {
+            let str = "";
+            for (let i = 0; i < array.length; i++) {
+                str += `<li class="showList" value="${i}" >${array[i]}</li>`;
+            }
+            outPut.innerHTML = str;
+        };
+        let clickDel = function () {
+            outPut.addEventListener("click", function (e) {
+                let i = parseInt(e.target.value);
+                array.splice(i, 1);
+                show();
+            })
+
+
+        };
+        let bthHander = function (direction) {
+            let item = input.value;
+
+            let getValue = function () {
+
+                if (item === "") {
+                    alert("please enter a number");
+                    input.focus();
+                } else if (isNaN(item)) {
+                    alert("please enter a number");
+                    item = "";
+                    input.focus();
+                }
+
+            };
+
+
+            let change = function () {
+                getValue();
+
+                if (direction === "leftIn") {
+                    array.unshift(item)
+
+                } else if (direction === "rightIn") {
+                    array.push(item)
+
+                } else if (direction === "leftOut") {
+                    array.shift()
+
+                } else if (direction === "rightOut") {
+                    array.pop()
+                }
+
+                show();
+            };
+
+
+            change();
+
+        };
+
+
+        button[0].onclick = function () {
+            bthHander(this.id);
+
+        };
+        button[1].onclick = function () {
+            bthHander(this.id);
+        };
+        button[2].onclick = function () {
+            bthHander(this.id);
+        };
+        button[3].onclick = function () {
+            bthHander(this.id);
+        };
+        clickDel();
+
+    }()
+
+
+</script>
+
+</body>
+</html>
