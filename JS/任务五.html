@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul {
+            margin-top: 100px;
+            display: flex;
+            align-items: flex-end;
+        }
+        ul>li:hover{
+            cursor: pointer;
+        }
+
+        .liStyle{
+            list-style: none;
+            float:left;
+            width:20px;
+            font-size:15px;
+            color:#fff;
+            background-color:red;
+            text-align:center;
+
+            margin-right:2px;
+            margin-top:5px;
+        }
+    </style>
+</head>
+<body>
+
+<label for="ipt"></label><input type="text" name="ipt" id="ipt">
+<button id="leftIn">左侧入</button>
+<button id="rightIn">右侧入</button>
+<button id="leftOut">左侧出</button>
+<button id="rightOut">右侧出</button>
+<button id="sort">BubbleSort</button>
+
+<ul id="outPut"></ul>
+
+
+<script>
+    !function () {
+        let input = document.getElementById("ipt"),
+            outPut = document.querySelector("#outPut"),
+            button = document.getElementsByTagName("button"),
+            array = [];
+
+        let show = function (list) {
+            outPut.innerHTML="";
+            if (list.length > 0) {
+                for(let i=0;i<list.length;i++) {
+                    let li = document.createElement("li");
+                    li.innerHTML = list[i];
+                    li.value = i;
+                    li.style.height = list[i] * 2 + "px";
+                    li.setAttribute("class", "liStyle");
+                    outPut.appendChild(li);
+                }
+            }
+        };
+        let clickDel = function () {
+            outPut.addEventListener("click", function (e) {
+                let i = parseInt(e.target.value);
+                array.splice(i, 1);
+                show();
+            })
+
+
+        };
+        let bthHander = function (direction) {
+
+            let control = function () {
+                let item = input.value;
+
+                if (item === "") {
+                    alert("please enter a number");
+                    return;
+                } else if (isNaN(item)) {
+                    alert("please enter a number");
+                    return;
+                } else if (item < 10 || item > 100) {
+                    alert("please enter a number between 10 and 100");
+                    return;
+                } else if (array.length > 60) {
+                    alert("too much element");
+                    return;
+                }
+
+                return item
+            };
+
+            let change = function () {
+                let item = control();
+                if (item) {
+                    if (direction === "leftIn") {
+                        array.unshift(item)
+
+                    } else if (direction === "rightIn") {
+                        array.push(item)
+
+                    } else if (direction === "leftOut") {
+                        array.shift()
+
+                    } else if (direction === "rightOut") {
+                        array.pop()
+                    }
+                }
+
+                show(array)
+
+            };
+
+            change();
+        };
+        let doBubble = function () {
+            let state=[];
+            let bubbleSort = function () {
+                let flag = true;
+                for (let i = 0; i < array.length; i++) {
+                    flag = true;
+                    for (let j = 0; j < array.length - i - 1; j++) {
+                        if (array[j] > array[j + 1]) {
+                            let tmp = array[j + 1];
+                            array[j + 1] = array[j];
+                            array[j] = tmp;
+                            flag = false;
+                        }
+                        state.push(JSON.parse(JSON.stringify(array)))
+                    }
+                    if (flag){
+                        return;
+                    }
+                }
+            };
+            let bubbleShow = function () {
+                let curState = state.shift();
+                if (curState){
+                    show(curState)
+                } else {
+                    clearInterval(timmer)
+                }
+            };
+            bubbleSort();
+            let timmer = setInterval(bubbleShow,1000)
+        };
+
+
+        button[0].onclick = function () {
+            bthHander(this.id);
+        };
+        button[1].onclick = function () {
+            bthHander(this.id);
+        };
+        button[2].onclick = function () {
+            bthHander(this.id);
+        };
+        button[3].onclick = function () {
+            bthHander(this.id);
+        };
+        button[4].onclick = function () {
+            doBubble();
+        };
+        clickDel();
+
+
+    }()
+
+
+</script>
+
+</body>
+</html>
