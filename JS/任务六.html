@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul {
+            margin-top: 100px;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        ul > li:hover {
+            cursor: pointer;
+        }
+
+        .liStyle {
+            list-style: none;
+            float: left;
+            width: 30px;
+            height: 30px;
+            font-size: 15px;
+            color: #fff;
+            background-color: red;
+            text-align: center;
+            margin-right: 2px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<textarea rows="5" cols="20" id="ipt"></textarea>
+
+<button>插入</button>
+
+<button>查询</button>
+
+<input type="text" id="search">
+
+<ul id="outPut"></ul>
+
+
+</body>
+
+<script>
+    let butList = document.getElementsByTagName("button");
+    let ipt = document.getElementById("ipt");
+    let outPut = document.getElementById("outPut");
+    let search = document.getElementById("search");
+    let array = [];
+    let show = function (list) {
+        outPut.innerHTML = "";
+        if (list.length > 0) {
+            for (let i = 0; i < list.length; i++) {
+                let li = document.createElement("li");
+                li.innerHTML = list[i];
+                li.value = i;
+                li.setAttribute("class", "liStyle");
+                outPut.appendChild(li);
+            }
+        }
+    };
+    butList[0].onclick = function () {
+        let text = ipt.value;
+        const reg = /[\r\s\n,，、;；]+/g;
+        array = text.split(reg);
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] === "") {
+                array.splice(i, 1);
+            }
+        }
+        show(array);
+    };
+
+    butList[1].onclick = function () {
+        let key = search.value;
+        match(key);
+
+    };
+    let match = function (key) {
+        let pattern = new RegExp(key,"g");
+        Array.prototype.forEach.call(outPut.childNodes,function (ele) {
+            if(pattern.test(ele.innerHTML)){
+                ele.style.backgroundColor = "#657fff"
+            }
+        })
+    }
+
+
+</script>
+
+</html>
