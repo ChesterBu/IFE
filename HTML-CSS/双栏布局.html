@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        /*法一*/
+        /*#left {*/
+            /*width: 300px;*/
+            /*height: 200px;*/
+            /*background-color: red;*/
+            /*float: left;*/
+        /*}*/
+
+        /*#right {*/
+            /*margin-left: 300px;*/
+            /*height: 200px;*/
+            /*background-color: blue;*/
+        /*}*/
+
+        /*法二*/
+        /*#left{*/
+            /*width: 300px;*/
+            /*height: 200px;*/
+            /*background-color: red;*/
+            /*display: table-cell;*/
+        /*}*/
+        /*#right{*/
+            /*height: 200px;*/
+            /*background-color: blue;*/
+            /*display: table-cell;*/
+        /*}*/
+        /*#out{*/
+            /*width: 100%;*/
+            /*display: table;*/
+        /*}*/
+
+        /*法三*/
+        /*#left{*/
+            /*width: 300px;*/
+            /*height: 200px;*/
+            /*background-color: red;*/
+            /*display: inline-block;*/
+            /*vertical-align: top;*/
+        /*}*/
+        /*#right{*/
+            /*height: 300px;*/
+            /*width: calc(100% - 400px);*/
+            /*!*margin-right: -400px;*!*/
+            /*background-color: blue;*/
+            /*display: inline-block;*/
+            /*vertical-align: top;*/
+        /*}*/
+        /*法四*/
+        #out{
+
+            display:flex;/*设为伸缩容器*/
+
+        }
+
+        #left{
+            width:200px;
+
+            height: 300px;
+
+            background:red;
+
+        }
+        #right{
+
+
+            height: 500px;
+            flex:1;/*这里设置为占比1，填充满剩余空间*/
+
+            background:blue;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div id="out">
+    <div id="left"></div>
+    <div id="right"></div>
+
+
+</div>
+
+</body>
+</html>
