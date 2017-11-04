@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .show {
+            width: 50%;
+            height: 150px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 100%);
+        }
+
+        div {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-around;
+            width: 45%;
+            height: 80%;
+            border: 3px solid #000000;
+            border-radius: 4px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="show">
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<button>前</button>
+<button>中</button>
+<button>后</button>
+
+<script>
+    let root = document.getElementsByClassName('show')[0];
+    let array = [];
+    let show = function () {
+        let previous;
+        for (let i = 0; i < array.length; i++) {
+            setTimeout(function (i) {
+                return function () {
+                    if(i=array.length-1){
+                        
+                    }
+                    if (previous) {
+                        previous.style.backgroundColor = 'white';
+                    }
+                    array[i].style.backgroundColor = 'red';
+                    previous = array[i];
+                }
+            }(i), 1000)
+        }
+    }
+    let preOrder = function (node) {
+        if (node !== null) {
+            array.push(node)
+            preOrder(node.firstElementChild)
+            preOrder(node.lastElementChild)
+        }
+        return array
+    }
+
+    let inOrder = function () {
+
+    }
+
+    let postOrder = function () {
+
+    }
+
+</script>
+</body>
+</html>
