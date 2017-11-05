@@ -28,6 +28,7 @@
             height: 80%;
             border: 3px solid #000000;
             border-radius: 4px;
+            background: white;
         }
 
 
@@ -63,14 +64,24 @@
 
 <script>
     let root = document.getElementsByClassName('show')[0];
+    let buttons = document.getElementsByTagName("button");
     let array = [];
+    let initControl = false;
+
+    let init = function () {
+            initControl = true;
+            for (let i = 0; i < array.length; i++) {
+                array[i].style.backgroundColor = "white";
+            }
+            array = [];
+    };
     let show = function () {
         let previous;
         for (let i = 0; i < array.length; i++) {
             setTimeout(function (i) {
                 return function () {
-                    if(i=array.length-1){
-                        
+                    if(i===array.length-1){
+                        initControl = false;
                     }
                     if (previous) {
                         previous.style.backgroundColor = 'white';
@@ -78,25 +89,55 @@
                     array[i].style.backgroundColor = 'red';
                     previous = array[i];
                 }
-            }(i), 1000)
+            }(i), i * 1000)
         }
-    }
+    };
     let preOrder = function (node) {
-        if (node !== null) {
-            array.push(node)
-            preOrder(node.firstElementChild)
-            preOrder(node.lastElementChild)
+        if (node) {
+            array.push(node);
+            preOrder(node.firstElementChild);
+            preOrder(node.lastElementChild);
         }
-        return array
-    }
+    };
+    let inOrder = function (node) {
+        if (node) {
+            inOrder(node.firstElementChild);
+            array.push(node);
+            inOrder(node.lastElementChild);
+        }
+    };
+    let postOrder = function (node) {
+        if (node) {
+            array.push(node);
+            postOrder(node.lastChild);
+            postOrder(node.firstChild);
+        }
+    };
 
-    let inOrder = function () {
+    buttons[0].onclick = function () {
+        if(!initControl){
+            init();
+            preOrder(root);
+            show();
+        }
 
-    }
+    };
+    buttons[1].onclick = function () {
+        if(!initControl){
+            init();
+            inOrder(root);
+            show();
+        }
 
-    let postOrder = function () {
+    };
+    buttons[2].onclick = function () {
+        if(!initControl){
+            init();
+            postOrder(root);
+            show();
+        }
 
-    }
+    };
 
 </script>
 </body>
