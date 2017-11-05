@@ -51,7 +51,6 @@
     let BucketSortX = function (array,size) {
         let max = array[0];
         let min = array[0];
-        let res=[];
         for(let i=0;i<array.length;i++){
             if(array[i]<min){
                 min = array[i];
@@ -71,7 +70,7 @@
         for(let i=0;i<array.length;i++){
             buckets[Math.floor((array[i]-min)/size)].push(array[i]);
         }
-
+        array.length=0;
         for (let i=0;i<buckets.length;i++){
             //对每个桶的元素排序
             for (let j = 1; j < buckets[i].length;j++) {
@@ -85,14 +84,11 @@
                     }
                 }
             }
-
             for (let z =0;z<buckets[i].length;z++){
-                res.push(buckets[i][z])
+                array.push(buckets[i][z])
             }
-
         }
-
-        return res;
+        return array;
     };
     let res = BucketSortX(a,5);
     console.log(res)
