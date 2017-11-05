@@ -15,9 +15,9 @@
             let tmp = array[i];
             for (let j = i; j >= 0; j--) {
                 if(array[j-1]>tmp){
-                    a[j] =a[j-1]     ;      //错位
+                    array[j] =array[j-1];      //错位
                 } else {
-                    a[j]=tmp;
+                    array[j]=tmp;
                     break;
                 }
             }
