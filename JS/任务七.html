@@ -69,18 +69,18 @@
     let initControl = false;
 
     let init = function () {
-            initControl = true;
-            for (let i = 0; i < array.length; i++) {
-                array[i].style.backgroundColor = "white";
-            }
-            array = [];
+        initControl = true;
+        for (let i = 0; i < array.length; i++) {
+            array[i].style.backgroundColor = "white";
+        }
+        array = [];
     };
     let show = function () {
         let previous;
-        for (let i = 0; i < array.length; i++) {
+        for (let i = 0; i < array.length + 1; i++) {
             setTimeout(function (i) {
                 return function () {
-                    if(i===array.length-1){
+                    if (i === array.length) {
                         initControl = false;
                     }
                     if (previous) {
@@ -89,7 +89,7 @@
                     array[i].style.backgroundColor = 'red';
                     previous = array[i];
                 }
-            }(i), i * 1000)
+            }(i), i * 700)
         }
     };
     let preOrder = function (node) {
@@ -115,7 +115,7 @@
     };
 
     buttons[0].onclick = function () {
-        if(!initControl){
+        if (!initControl) {
             init();
             preOrder(root);
             show();
@@ -123,7 +123,7 @@
 
     };
     buttons[1].onclick = function () {
-        if(!initControl){
+        if (!initControl) {
             init();
             inOrder(root);
             show();
@@ -131,7 +131,7 @@
 
     };
     buttons[2].onclick = function () {
-        if(!initControl){
+        if (!initControl) {
             init();
             postOrder(root);
             show();

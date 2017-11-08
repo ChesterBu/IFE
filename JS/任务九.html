@@ -31,6 +31,9 @@
             border-radius: 4px;
             background: white;
         }
+        div:hover{
+            cursor: pointer;
+        }
 
         form {
             display: flex;
@@ -106,16 +109,17 @@
 <form>
     <button id="btn-before">前序遍历</button>
     <button id="btn-behind">后序遍历</button>
+    <button id="btn-delete">删除</button>
     <div>
         <input type="text" name="inp-search" id="inp-search">
-        <button id="btn-search">查询</button>
+        <button id="btn-add">添加</button>
     </div>
 </form>
 <script>
     let root = document.getElementsByClassName('show')[0];
     let buttons = document.getElementsByTagName("button");
     let array = [];
-    let res = [];
+    let delList = [];
     let initControl = false;
     let init = function () {
         initControl = true;
@@ -126,7 +130,7 @@
     };
     let show = function (array) {
         let previous;
-        for (let i = 0; i < array.length + 1; i++) {
+        for (let i = 0; i < array.length+1; i++) {
             setTimeout(function (i) {
                 return function () {
                     if (i === array.length) {
@@ -157,50 +161,21 @@
             array.push(node);
         }
     };
-    let search = function () {
-        let pattern = document.getElementById("inp-search").value;
-        pattern = pattern.trim();
-        if (!pattern) {
-            alert("Please Enter Something!!!");
-            return;
-        }
-        let key = new RegExp(pattern, "g");
-        let searchList = [];
-        let post = function (node) {
-            if (node) {
-                for (let i = 0; i < node.children.length; i++) {
-                    post(node.children[i])
-                }
-                searchList.push(node);
-            }
 
-        };
-        post(root);
-        for (let i = 0; i < searchList.length; i++) {
-            searchList[i].style.backgroundColor = "white";
-        }
-        res = [];
-        for (let i = 0; i < searchList.length; i++) {
-            let list = searchList[i].childNodes;
-            for (let j = 0; j < list.length; j++) {
-                if (list[j].nodeType === 3 && list[j] !== null && key.test(list[j].nodeValue)) {
-                    searchList[i].style.backgroundColor = 'blue';
-                    res.push(searchList[i]);
-                }
-            }
-        }
-        let foundTest = function () {
-            if (!res.length) {
-                alert("Not Found!");
+    let Choice = function () {
+        root.addEventListener('click', function (e) {
+            if(delList.length<1){
+                e.target.style.backgroundColor = 'yellow'
+                delList.push(e.target);
             } else {
-                alert("Found " + res.length + " !")
+                delList[0].style.backgroundColor = "white";
+                delList=[];
+                e.target.style.backgroundColor = 'yellow'
+                delList.push(e.target);
             }
-        };
-        foundTest();
-
-
-    };
-
+        })
+    }
+    ~(Choice())
     buttons[0].onclick = function (e) {
         e.preventDefault();
         if (!initControl) {
@@ -221,9 +196,20 @@
     };
     buttons[2].onclick = function (e) {
         e.preventDefault();
-        search();
+        for (let i = 0; i < delList.length; i++) {
+            delList[i].style.display = 'none';
+        }
     }
-
+    buttons[3].onclick = function (e) {
+        e.preventDefault();
+        let key = document.getElementById('inp-search').value;
+        if(delList.length){
+            let div = document.createElement('div');
+            div.innerText = key;
+            div.style.width = 'auto';
+            delList[0].appendChild(div);
+        }
+    }
 </script>
 </body>
 </html>
