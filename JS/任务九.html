@@ -165,17 +165,17 @@
     let Choice = function () {
         root.addEventListener('click', function (e) {
             if(delList.length<1){
-                e.target.style.backgroundColor = 'yellow'
+                e.target.style.backgroundColor = 'yellow';
                 delList.push(e.target);
             } else {
                 delList[0].style.backgroundColor = "white";
                 delList=[];
-                e.target.style.backgroundColor = 'yellow'
+                e.target.style.backgroundColor = 'yellow';
                 delList.push(e.target);
             }
         })
-    }
-    ~(Choice())
+    };
+    ~(Choice());
     buttons[0].onclick = function (e) {
         e.preventDefault();
         if (!initControl) {
@@ -199,7 +199,7 @@
         for (let i = 0; i < delList.length; i++) {
             delList[i].style.display = 'none';
         }
-    }
+    };
     buttons[3].onclick = function (e) {
         e.preventDefault();
         let key = document.getElementById('inp-search').value;
@@ -209,7 +209,7 @@
             div.style.width = 'auto';
             delList[0].appendChild(div);
         }
-    }
+    };
 </script>
 </body>
 </html>
