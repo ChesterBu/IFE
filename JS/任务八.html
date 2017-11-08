@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .show {
+            width: 95%;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 40%);
+        }
+
+        div {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-around;
+            width: 45%;
+            height: 80%;
+            margin: 5px;
+            padding: 5px;
+            border: 3px solid #000000;
+            border-radius: 4px;
+            background: white;
+        }
+
+        form {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            float: left;
+            position: relative;
+            top: 190px;
+            width: 100%;
+        }
+
+        button[id*="btn-"] {
+            display: inline-block;
+            margin: 0 10px;
+            width: 70px;
+            height: 30px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            background: #fff;
+            font-weight: bold;
+            line-height: 26px;
+            color: #b0e11e;
+            cursor: pointer;
+            -webkit-transition: color 0.1s linear, background 0.1s linear;
+            transition: color 0.1s linear, background 0.1s linear;
+        }
+
+        button[id*="btn-"]:hover, button[id*="btn-"]:focus {
+            color: #fff;
+            background: #b0e11e;
+        }
+
+        #inp-search {
+            border: 2px solid #000;
+            border-radius: 5px;
+            padding-left: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="show">
+    <div>
+        <div>一只孤独的船</div>
+        <div>
+            <div>莱蒙托夫</div>
+            <div>俄</div>
+            一只船
+        </div>
+        <div>
+            <div>孤独地航</div>
+            <div>行在海上</div>
+        </div>
+        它既不寻求幸福
+    </div>
+    <div>
+        也不逃避幸福
+        <div>
+            <div> 它只是向前航行</div>
+            <div>底下是沉静碧蓝的大海</div>
+        </div>
+        <div>
+            <div>而头顶是金色的太阳</div>
+            <div>将要直面的</div>
+        </div>
+        与已成过往的
+    </div>
+    <div>
+        较之深埋于它内心的
+        <div>皆为微沫</div>
+    </div>
+</div>
+<form>
+    <button id="btn-before">前序遍历</button>
+    <button id="btn-behind">后序遍历</button>
+    <div>
+        <input type="text" name="inp-search" id="inp-search">
+        <button id="btn-search">查询</button>
+    </div>
+</form>
+<script>
+    let root = document.getElementsByClassName('show')[0];
+    let buttons = document.getElementsByTagName("button");
+    let array = [];
+    let res = [];
+    let initControl = false;
+    let init = function () {
+        initControl = true;
+        for (let i = 0; i < array.length; i++) {
+            array[i].style.backgroundColor = "white";
+        }
+        array = [];
+    };
+    let show = function (array) {
+        let previous;
+        for (let i = 0; i < array.length; i++) {
+            setTimeout(function (i) {
+                 return function () {
+                    if (i === array.length - 1) {
+                        initControl = false;
+                    }
+                    if (previous) {
+                        previous.style.backgroundColor = 'white';
+                    }
+                    array[i].style.backgroundColor = 'red';
+                    previous = array[i];
+                }
+            }(i), i * 300)
+        }
+    };
+    let preOrder = function (node) {
+        if (node) {
+            array.push(node);
+            for (let i = 0; i < node.children.length; i++) {
+                preOrder(node.children[i])
+            }
+        }
+    };
+    let postOrder = function (node) {
+        if (node) {
+            for (let i = 0; i < node.children.length; i++) {
+                postOrder(node.children[i])
+            }
+            array.push(node);
+        }
+    };
+    let search = function () {
+        let pattern = document.getElementById("inp-search").value;
+        pattern = pattern.trim();
+        if (!pattern) {
+            alert("Please Enter Something!!!");
+            return;
+        }
+        let key = new RegExp(pattern, "g");
+        let searchList = [];
+        let post = function (node) {
+            if (node) {
+                for (let i = 0; i < node.children.length; i++) {
+                    post(node.children[i])
+                }
+                searchList.push(node);
+            }
+
+        };
+        post(root);
+        for (let i = 0; i < searchList.length; i++) {
+            searchList[i].style.backgroundColor = "white";
+        }
+        res = [];
+        for (let i = 0; i < searchList.length; i++) {
+            let list = searchList[i].childNodes;
+            for (let j = 0; j < list.length; j++) {
+                if (list[j].nodeType === 3 && list[j] !== null && key.test(list[j].nodeValue)) {
+                    searchList[i].style.backgroundColor = 'blue';
+                    res.push(searchList[i]);
+                }
+            }
+        }
+        let foundTest = function () {
+            if (!res.length) {
+                alert("Not Found!");
+            } else {
+                alert("Found " + res.length + " !")
+            }
+        };
+        foundTest();
+
+
+    };
+
+    buttons[0].onclick = function (e) {
+        e.preventDefault();
+        if (!initControl) {
+            init();
+            preOrder(root);
+            show(array);
+        }
+        console.log(array)
+    };
+    buttons[1].onclick = function (e) {
+        e.preventDefault();
+        if (!initControl) {
+            init();
+            postOrder(root);
+            show(array);
+        }
+
+    };
+    buttons[2].onclick = function (e) {
+        e.preventDefault();
+        search();
+    }
+
+</script>
+</body>
+</html>
