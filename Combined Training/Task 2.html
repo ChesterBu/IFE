@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-size: 15px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        form > div {
+            position: relative;
+            display: inline-block;
+            border: 1px solid #eeefff;
+            border-radius: 6px;
+            padding: 50px 150px 40px;
+            transform: translateY(100%);
+        }
+
+        #val {
+            box-sizing: border-box;
+            height: 30px;
+            padding: 6px 12px;
+            margin: 0 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        }
+
+        #submit {
+            display: inline-block;
+            color: #fff;
+            background-color: #337ab7;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid #2e6da4;
+            border-radius: 4px;
+        }
+
+        #hint {
+            text-align: center;
+            font-size: 12px;
+            margin: 0 0;
+            line-height: 45px;
+            color: #AAAAAA;
+            opacity: 0;
+
+        }
+
+    </style>
+</head>
+<body>
+<form>
+    <div>
+        <label for="val">名称</label><input type="text" id="val">
+        <p id="hint">必填：长度为4~16个字符</p>
+        <input type="button" id="submit" value="提交">
+    </div>
+</form>
+<script>
+    let val = document.getElementById('val');
+    let hint = document.getElementById('hint');
+    let check = document.getElementById('submit');
+    let control = false;
+
+
+    let checkOk = function (input,hint) {
+        input.style.borderColor = 'lawngreen';
+        hint.style.opacity = '1';
+        hint.style.color = 'lawngreen';
+        hint.innerText = '验证通过';
+        control = true;
+    };
+     let checkFail = function (input,hint) {
+         input.style.borderColor = 'red';
+         hint.style.opacity = '1';
+         hint.style.color = 'red';
+         hint.innerText = '名称不可为空';
+     };
+
+
+
+    val.onblur = function () {
+        hint.style.opacity = '0';
+        let value = val.value;
+        if(value){
+            checkOk(val,hint)
+        } else {
+            checkFail(val,hint)
+        }
+    };
+
+    val.onfocus = function () {
+        hint.style.opacity = '1';
+    };
+
+    check.onclick = function () {
+        if(control){
+            alert("提交成功")
+        } else {
+            alert("提交失败")
+        }
+    };
+</script>
+</body>
+</html>
