@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            box-sizing: border-box;
+        }
+
+        .main {
+            position: relative;
+            height: 1080px;
+        }
+
+        .musk {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .5);
+            z-index: 2;
+            display: none;
+        }
+
+        .panel {
+            width: 400px;
+            height: 300px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            background-color: #eee;
+            padding: 0;
+            border-radius: 5px;
+            cursor: move;
+            display: none;
+        }
+
+        button {
+            width: 120px;
+            height: 30px;
+            border-radius: 5px;
+            margin-right: 20px;
+            background: #999;
+            color: #fff;
+        }
+
+        h1 {
+            height: 50px;
+            line-height: 50px;
+            font-size: 20px;
+            background-color: #999;
+            color: #fff;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            padding-left: 10px;
+        }
+
+        .button-group {
+            position: absolute;
+            right: 0;
+            bottom: 20px;
+        }
+
+        #out {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+<div class="main" id="main">
+    <div class="musk" id="musk"></div>
+    <div class="panel" id="panel">
+        <h1>弹出层标题</h1>
+        <p>弹出层文字</p>
+        <div class="button-group">
+            <button id="submit">确定</button>
+            <button id="cancle">取消</button>
+        </div>
+    </div>
+    <button id="out">弹出弹出层</button>
+</div>
+
+
+<script>
+    let out = document.getElementById("out");
+    let musk = document.getElementById("musk");
+    let panel = document.getElementById("panel");
+    let submit = document.getElementById("submit");
+    let cancle = document.getElementById("cancle");
+
+    function show() {
+        musk.style.display = 'block';
+        panel.style.display = 'block';
+    }
+
+    function hide() {
+        panel.style.display = 'none';
+        musk.style.display = 'none';
+    }
+    musk.onclick = hide;
+    submit.onclick = hide;
+    cancle.onclick = hide;
+    out.onclick = show;
+
+    let params = {
+        left:0,
+        top:0,
+        currentX:0,
+        cutrrentY:0,
+        flag:false
+    };
+
+    function getCss(node,key) {
+        return document.defaultView.getComputedStyle(node,null)[key];
+    }
+
+
+    function drag(target) {
+        params.left = getCss(target,'left');
+        params.top = getCss(target,'top');
+
+        target.onmousedown = function (evt) {
+
+            params.flag=true;
+            evt.preventDefault();
+            params.currentX = evt.clientX;
+            params.currentY = evt.clientY;
+        };
+        target.onmouseup=function () {
+            params.flag = false;
+            params.left = getCss(target,'left');
+            params.top = getCss(target,'top');
+        };
+        target.onmousemove = function (evt) {
+            if(params.flag){
+                let nowX = evt.clientX;
+                let nowY = evt.clientY;
+                let disX = nowX - params.currentX;
+                let disY = nowY - params.currentY;
+                target.style.left = parseInt(params.left)+disX+'px';
+                target.style.top = parseInt(params.top)+disY+'px';
+            }
+        };
+    }
+    drag(panel)
+</script>
+</body>
+</html>
