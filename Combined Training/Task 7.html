@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        #box {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid lawngreen;
+            border-radius: 10px;
+            box-shadow: 3px 3px 10px 0 #999999;
+
+        }
+
+        #box thead {
+            background-color: green;
+        }
+
+        #box thead tr {
+            height: 30px;
+        }
+
+        #box thead tr th {
+            width: 100px;
+            color: #ffffff;
+        }
+
+        #box thead tr th:nth-child(n+2) {
+            cursor: pointer;
+        }
+
+        #box tbody tr {
+            height: 30px;
+        }
+
+        #box tbody tr:nth-child(even) {
+            background: lightgreen;
+        }
+
+        #box tbody td {
+            width: 100px;
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+<body>
+<table id="box">
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>武力值</th>
+        <th>年龄</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>小明</td>
+        <td>80</td>
+        <td>30</td>
+    </tr>
+    <tr>
+        <td>小红</td>
+        <td>85</td>
+        <td>25</td>
+    </tr>
+    <tr>
+        <td>小刚</td>
+        <td>60</td>
+        <td>20</td>
+    </tr>
+    <tr>
+        <td>小强</td>
+        <td>50</td>
+        <td>10</td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    let tab = document.getElementById("box");
+    let oThs = tab.tHead.rows[0].cells;
+    let tBody = tab.tBodies[0];
+    let oRows = tBody.rows;
+
+    let sort = function (i) {
+        let _this = this;
+        let ary = Array.prototype.slice.call(oRows);
+        _this.flag *= -1;
+        //点击当前列的同时，应使其他列的flag回复默认值产生第一次点从小到大排序的效果
+        for (let i = 0; i < oThs.length; i++) {
+            if (oThs[i] !== _this) {
+                oThs[i].flag = -1;
+            }
+        }
+        ary.sort(function (a, b) {
+            return parseInt(a.cells[i].innerHTML) - parseInt(b.cells[i].innerHTML) * _this.flag;
+        });
+
+        let frg = document.createDocumentFragment();
+        for (let i = 0; i < ary.length; i++) {
+            frg.appendChild(ary[i]);
+        }
+        tBody.appendChild(frg);
+        frg = null;
+    };
+//    oThs[1].flag = -1;
+//    oThs[1].onclick = function () {
+//        sort.call(this, 1)
+//    };
+//    oThs[2].flag = -1;
+//    oThs[2].onclick = function () {
+//        sort.call(this, 2)
+//    };
+    for(let i=0;i<oThs.length;i++){
+        oThs[i].flag = -1;
+        oThs[i].onclick = function () {
+            sort.call(this, i)
+        };
+    }
+
+
+
+</script>
+</body>
+</html>
