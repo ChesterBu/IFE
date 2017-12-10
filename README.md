@@ -37,10 +37,10 @@
 
 ## 其他
 
-* [1](https://github.com/ecmadao/Coding-Guide)
-* [2](https://github.com/wengjq/Blog)
-* [3](https://github.com/laizimo/zimo-article)
-* [4](https://github.com/wy-ei/notebook)
+* [1](https://github.com/laizimo/zimo-article)
+* [2](https://github.com/wy-ei/notebook)
+* [3](https://github.com/ecmadao/Coding-Guide)
+* [4](https://github.com/wengjq/Blog)
 * [前端必备](https://segmentfault.com/bookmark/1230000000699287)
 * [前端日报](https://github.com/daochouwangu/webfrontdaily/issues)
 
