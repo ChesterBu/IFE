@@ -9,6 +9,7 @@
 
 
 ## 原生JavaScript
+* [30 seconds of code Gitter chat](https://github.com/kujian/30-seconds-of-code)
 * [JS归纳](https://segmentfault.com/bookmark/1230000002226470)
 * [详解JS](https://segmentfault.com/bookmark/1230000002226575)
 * [JS深入系列](https://github.com/mqyqingfeng/Blog)
@@ -27,7 +28,7 @@
 * [精益React学习指南](https://segmentfault.com/a/1190000005136764)
 * [JS框架相关](https://segmentfault.com/bookmark/1230000002591304)
 
- 
+
 ## NodeJs
  * [饿了么NodeJs深入](https://github.com/ElemeFE/node-interview/tree/master/sections/zh-cn)
 
@@ -44,8 +45,3 @@
 * [4](https://github.com/wengjq/Blog)
 * [前端必备](https://segmentfault.com/bookmark/1230000000699287)
 * [前端日报](https://github.com/daochouwangu/webfrontdaily/issues)
-
-
-
-
-
