@@ -44,7 +44,7 @@
 * [面试题3](http://hawx1993.github.io/Front-end-Interview-Questions/#/?id=interview-quesetions)
 
 ## 其他
-###### * [前端文章](http://mertensming.github.io/)
+* [前端文章](http://mertensming.github.io/)
 * [1](https://github.com/laizimo/zimo-article)
 * [2](https://github.com/wy-ei/notebook)
 * [3](https://github.com/ecmadao/Coding-Guide)
