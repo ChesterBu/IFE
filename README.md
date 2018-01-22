@@ -17,6 +17,7 @@
 * [详解JS](https://segmentfault.com/bookmark/1230000002226575)
 * [JS深入系列](https://github.com/mqyqingfeng/Blog)
 * [AJAX系列](https://segmentfault.com/a/1190000012207226)
+* [Fetch](https://segmentfault.com/a/1190000003810652)
 * [异步流程之Promise解析](https://segmentfault.com/a/1190000011986252)
 * [Promise系列](https://segmentfault.com/a/1190000000586666)
 * [JS异步](https://github.com/wangfupeng1988/js-async-tutorial)
