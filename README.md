@@ -27,6 +27,7 @@
 
 
 ## JS框架相关
+* [vue入门](http://aicoder.com/vue/preview/all.html#902)
 * [双向数据绑定的实现](https://github.com/DMQ/mvvm)
 * [UnderScore源码解读](https://github.com/hanzichi/underscore-analysis)
 * [jQuery 源码解读](https://github.com/songjinzhong/JQuerySource)
